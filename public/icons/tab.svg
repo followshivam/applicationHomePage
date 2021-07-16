@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+   <defs>
+      <style>.a{fill:none;}.b{fill:#fff;stroke:#606060;}.c{stroke:none;}</style>
+   </defs>
+   <g transform="translate(-4504 3070)">
+      <path class="a" d="M0,0H16V16H0Z" transform="translate(4504 -3070)" />
+      <g transform="translate(0 -12)">
+         <g class="b" transform="translate(4507 -3054)">
+            <rect class="c" width="10" height="1.5" />
+            <rect class="a" x="0.5" y="0.5" width="9" height="0.5" />
+         </g>
+         <g class="b" transform="translate(4507 -3051)">
+            <rect class="c" width="10" height="1.5" />
+            <rect class="a" x="0.5" y="0.5" width="9" height="0.5" />
+         </g>
+         <g class="b" transform="translate(4507 -3048)">
+            <rect class="c" width="10" height="1.5" />
+            <rect class="a" x="0.5" y="0.5" width="9" height="0.5" />
+         </g>
+      </g>
+   </g>
+</svg>

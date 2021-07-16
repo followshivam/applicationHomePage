@@ -1,0 +1,7 @@
+.header{
+    height:1.5em;
+    display: flex;
+    padding:5px 10px;
+    border-bottom: 2px solid #9c5f04;
+    /* justify-content: flex-start; */
+}

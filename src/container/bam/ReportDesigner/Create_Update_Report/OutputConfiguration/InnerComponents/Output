@@ -1,0 +1,196 @@
+import React, {useState} from 'react'
+import {
+    Paper,
+    Checkbox,
+    Input,
+    Typography,
+    Grid,
+    AppBar,
+    Table,
+    TableBody,
+    TableCell,
+    TableRow,
+    TableHead,
+    TableContainer,
+    makeStyles,
+    IconsButton,
+    Toolbar,
+    InputBox
+  } from "component";
+import RowDragger from "component/RowDragger"
+  const useStyles = makeStyles((theme) => ({
+    paperLeft: {
+        textAlign: 'left',
+        minHeight: "630px",
+        paddingLeft: '10px'
+    },
+    paperRight: {
+        textAlign: 'center',
+        // border: '1px solid #f8f8f8',
+        backgroundColor: theme.palette.backgroundContainer,
+        minHeight: "630px",
+        // width:888,
+        // height:581
+    },
+    app_root:{    flex:1,
+    flexGrow: 1,
+    width:"100%",
+   height:35,
+  boxShadow: `0px 2px 4px -1px rgba(0,0,0,0.1)`
+},
+    toolbar:{
+        "& > *":{
+            marginRight:theme.spacing(10),
+            marginLeft:theme.spacing(5)
+        }
+    },
+dragger_toolbar:{
+      "& > *":{
+            marginRight:theme.spacing(10),
+            //  marginLeft:theme.spacing(10)
+        }
+},
+    calculate : {
+        float: 'right',
+        color: 'blue',
+        fontWeight: '500',
+        marginRight: '10px'
+    },
+    filedsData: {
+        fontWeight: 'bold'
+    },
+    paddingTop: {
+        paddingTop: '10px'
+    },
+    tableStyles: {
+        width: '300px'
+    },
+    inputStyle: {
+        borderRadius: 4,
+        position: 'relative',
+        border: '1px solid #ced4da',
+        width: 'auto',
+        fontSize: '12px',
+        padding: '0 4px',
+        '&&&:before': {
+            borderBottom: 'none'
+        },
+        '&&:after': {
+            borderBottom: 'none'
+        }
+    },
+    tableCellStyle: {
+        borderBottom: 'none'
+    }
+
+  }));
+
+
+function tableData(fieldName, type, alias){
+    return { fieldName, type, alias }
+}
+
+const rows = [
+    tableData('ProcessDefId', 'Integer', 'Process Def Id'),
+    tableData('Activity ID', 'Integer', 'Activity Id'),
+    tableData('ProcessDefId', 'Text', 'Activity Name'),
+    tableData('ProcessDefId', 'Text', 'Activity Type'),
+    tableData('ProcessDefId', 'Integer', 'Process Def Id'),
+    tableData('ProcessDefId', 'Text', 'Process Def Id'),
+    tableData('ProcessDefId', 'Integer', 'Process Def Id'),
+]
+const LeftContainer=(props)=>{
+    const classes=useStyles();
+        const [checked, setChecked] = useState(false);
+    const [rowData, setRowData] = useState({})
+
+    const handleChange = (event) => {
+      setChecked(event.target.checked);
+    };
+
+    const handleChangeTableRow = (row) => {
+        setRowData(row)
+    }
+    return(    <Paper className={classes.paperLeft} elevation={0}>
+                        <div>
+                            <span className={classes.filedsData}>Fields from Table</span>
+                            <span className={classes.calculate}>+ Calculated Field</span>
+                        </div>
+                        <div className={classes.paddingTop}>
+                            <span>Select the fields you want for output.</span>
+                            <span className={classes.calculate}>Invert</span>
+                        </div>
+                        <div className={classes.paddingTop}>
+                        <Checkbox
+                            size= 'small'
+                            onChange={handleChange}
+                            color="primary"
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />
+                        Select the Only Distinct Records
+                        </div>
+                        <div className={classes.paddingTop}>
+                            <TableContainer>
+                                <Table className={classes.table}>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Field Name</TableCell>
+                                            <TableCell align='left'>Type</TableCell>
+                                            <TableCell align='left'>Alias</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {rows.map((row,i) => (
+                                            <TableRow key={i}> 
+                                                <TableCell className={classes.tableCellStyle}><Checkbox
+                                                    size= 'small'
+                                                    onChange={() => handleChangeTableRow(row)}
+                                                    color="primary"
+                                                    // inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                                />{row.fieldName}</TableCell>
+                                                <TableCell className={classes.tableCellStyle}>{row.type}</TableCell>
+                                                <TableCell className={classes.tableCellStyle}>
+                                                <InputBox value={row.alias} style={{width:"140px"}} /></TableCell>
+                                            </TableRow>
+                                        )
+                                            )}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
+                    </Paper>)
+}
+const RightContainer=(props)=>{
+    const classes=useStyles();
+    const [items,setItems]=useState([1,2,3,4,5,6])
+    return(                    <Paper className={classes.paperRight} elevation={0}> 
+    <div className={classes.app_root}>
+      <Toolbar variant="dense" className={classes.toolbar} >
+          <Typography>Field Name</Typography>
+        <Typography>Type</Typography>
+        <Typography>Alias</Typography>
+        </Toolbar>
+    </div>
+
+                 <RowDragger items={items} onChange={(list)=>setItems(list)}/>
+                    </Paper>)
+}
+const OutputFields = () => {
+    const classes = useStyles();
+
+
+        return (
+            <Grid container spacing={0} >
+                <Grid item sm={3}>
+                    <LeftContainer/>
+                </Grid>
+                <Grid item sm={9}>
+                <RightContainer/>
+
+                </Grid>
+            </Grid>
+          );
+
+}
+
+export default OutputFields

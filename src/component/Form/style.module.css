@@ -1,0 +1,14 @@
+.container1 .labeltype {
+  max-width: 95px;
+  min-width: 95px;
+}
+.radio_group_container {
+  display: flex;
+  margin: 15px;
+}
+.label {
+  padding: 1px;
+}
+.text_area:focus {
+  border: 1px solid red;
+}

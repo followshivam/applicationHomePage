@@ -1,0 +1,53 @@
+/*---------------------main-----------------------*/
+.stepper {
+  display: flex;
+  flex: 1;
+  height: 50px;
+  background: white;
+  /*position: fixed;*/
+  /*width: 100%;*/
+  z-index: 2;
+  align-items: center;
+  justify-content: flex-start;
+}
+.stepper > * {
+  display: flex;
+  justify-content: center;
+  margin-left: 40px;
+}
+.step_label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.step_label > * {
+  margin: 2px;
+}
+.numberCircle {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  text-align: center;
+  font-size: 12px;
+}
+.name_pane {
+  position: absolute;
+  left: 0;
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
+  align-items: center;
+}
+.stepper_title {
+  font-size: 14px;
+  font-weight: 600;
+}
+.stepper_subtitle {
+  background-color: #efefef;
+  width: 37px;
+  height: 14px;
+}
+.formMargin>*{
+  margin-top:23px
+}

@@ -1,0 +1,235 @@
+{
+    ".testclass": {
+        "fontSize": "20px",
+        "color": "pink !important",
+        "background":"green"
+    },
+    ".fieldlabel": {
+        "fontSize": "15px !important",
+        "fontFamily": "Open Sans !important",
+        "fontStyle": "Normal !important",
+        "color": "black !important",
+        "fontWeight": "Normal !important",
+        "whiteSpace": "nowrap"
+    },
+    ".fieldlabelDisabled": {
+        "fontSize": "11px !important",
+        "fontFamily": "Open Sans !important",
+        "fontStyle": "Normal !important",
+        "color": "#727272",
+        "whiteSpace": "nowrap",
+        "fontWeight": "Normal !important"
+    },
+    ".buttonstyle": {
+        "cursor": "pointer",
+        "display": "inline-block",
+        "position": "relative"
+    },
+    "input": {
+        "fontSize": "11px !important",
+        "fontFamily": "Open Sans !important",
+        "fontStyle": "Normal !important",
+        "color": "#000000",
+        "backgroundColor": "#fff !important",
+        "fontWeight": "Normal !important",
+        "border": "1px solid #d7d7d7",
+        "boxSizing": "border-box",
+        "padding": "0px 8px !important",
+        "borderRadius": "2px !important",
+        "backgroundImage": "none",
+        "height": "30px !important"
+    },
+    "body textarea": {
+        "fontSize": "11px !important",
+        "fontFamily": "Open Sans !important",
+        "fontStyle": "Normal !important",
+        "color": "#000000 !important",
+        "backgroundColor": "#FFF !important",
+        "fontWeight": "Normal !important",
+        "height": "30px !important",
+        "border": "1px solid #d7d7d7",
+        "boxSizing": "border-box",
+        "padding": "0px 8px !important",
+        "paddingTop": "3px !important",
+        "borderRadius": "2px !important",
+        "outline": "none !important"
+    },
+    "body textarea[disabled], body textarea[readonly='readonly']": {
+        "border": "1px solid #d7d7d7 !important",
+        "color": "#727272 !important",
+        "backgroundColor": "#f3f3f3 !important"
+    },
+    "body select": {
+        "fontSize": "11px !important",
+        "fontFamily": "Open Sans !important",
+        "fontStyle": "Normal !important",
+        "color": "#000000 !important",
+        "backgroundColor": "#ffffff  !important",
+        "fontWeight": "Normal !important",
+        "border": "1px solid #d7d7d7  !important",
+        "boxSizing": "border-box",
+        "padding": "0px 8px !important",
+        "paddingRight": "0px !important",
+        "borderRadius": "2px !important",
+        "outline": "none !important",
+        "height": "22px",
+        "lineHeight": "22px"
+    },
+    "body select[disabled]": {
+        "border": "1px solid #d7d7d7 !important",
+        "color": "#727272 !important",
+        "backgroundColor": "#f3f3f3 !important"
+    },
+    "input: not([type='button']): not([type='submit']): not(['readonly='readonly']):focus": {
+        "border": "1px solid  #0072c6 !important",
+        "-webkit-box-shadow": "0 0 5px rgba(0,114,198,.5)",
+        "-moz-box-shadow": "0 0 5px rgba(0,114,198,.5)",
+        "boxShadow": "0 0 5px rgba(0,114,198,.5)"
+    },
+    "body input[type='text'],input[type='password']": {
+        "height": "22px !important",
+        "lineHeight": "22px !important",
+        "padding": "0px 8px !important"
+    },
+    "input[type='file']": {
+        "padding": "0px 0px !important"
+    },
+    "body input[type='submit']: not([value='...']): not([value='..']), body input[type='button']: not([value='...']): not([value='..']): not([value=''])' ": {
+        "height": "20px",
+        "textAlign": "center !important",
+        "backgroundColor": "#00599a",
+        "border": "1px solid #00599a",
+        "color": "#FFFFFF",
+        "backgroundImage": "none",
+        "textDecoration": "none"
+    },
+    "body": {
+        "backgroundColor": "#FFFFFF",
+        "fontSize": "11px !important",
+        "fontFamily": "Open Sans !important",
+        "fontStyle": "Normal !important",
+        "color": "#000000 !important",
+        "fontWeight": "Normal !important",
+        "scrollbarFaceColor": "rgba(201,201,201,1)",
+        "scrollbarShadowColor": "transparent",
+        "scrollbarHighlightColor": "transparent",
+        "scrollbar3dlightColor": "transparent",
+        "scrollbarDarkshadowcolor": "transparent",
+        "scrollbarTrackColor": "transparent",
+        "scrollbarArrowColor": "transparent"
+    },
+    "form": {
+        "marginBottom": "0em !important"
+    },
+    "input[type='checkbox]": {
+        "backgroundColor": "transparent",
+        "height": "12px",
+        "width": "12px",
+        "padding": "0px !important",
+        "margin": "0px !important"
+    },
+    "input[type='radio']": {
+        "backgroundColor": "transparent",
+        "height": "12px",
+        "width": "12px",
+        "padding": "0px !important",
+        "margin": "0px !important"
+    },
+    "input[type=submit][disabled],input[type=submit][readonly='readonly']": {
+        "cursor": "default",
+        "color": "#727272 !important",
+        "backgroundColor": "#e1e1e1 !important"
+    },
+    "input[type=button][disabled],input[type=button][readonly='readonly']": {
+        "cursor": "default",
+        "color": "#727272 !important",
+        "backgroundColor": "#e1e1e1 !important"
+    },
+    "body input[disabled], body input[readonly='readonly'], .buttonstyle[disabled], .buttonstyle[readonly='readonly']": {
+        "border": "1px solid #d7d7d7 !important",
+        "color": "#727272 !important",
+        "backgroundColor": "#f3f3f3 !important",
+        "cursor": "default"
+    },
+    ":-webkit-scrollbar": {
+        "height": "8px",
+        "width": "8px"
+    },
+    ":-webkit-scrollbar-button": {
+        "height": "0",
+        "width": "0"
+    },
+    ":-webkit-scrollbarTrack": {
+        "backgroundColor": "transparent"
+    },
+    ":-webkit-scrollbarThumb": {
+        "backgroundClip": "padding-box",
+        "backgroundColor": "rgba(201,201,201,1)",
+        "border": "1px solid transparent",
+        "minHeight": "20px",
+        "minWidth": "20px",
+        "height": "5px",
+        "width": "5px"
+    },
+    ":-webkit-scrollbarThumb:hover": {
+        "backgroundColor": "#8f8f8f"
+    },
+    ":-webkit-scrollbarTrack:hover": {
+        "backgroundColor": "rgba(240,240,240,1)",
+        "border": "1px solid #d9d9d9"
+    },
+    ":-webkit-scrollbarThumb:active": {
+        "backgroundColor": "#8f8f8f"
+    },
+    "@font-face": [
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2) format('woff2')",
+            "unicodeRange": "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640A69F, U+FE2E-FE2F"
+        },
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2) format('woff2')",
+            "unicodeRange": "U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116"
+        },
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2) format('woff2')",
+            "unicodeRange": "U+1F00-1FFF"
+        },
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2) format('woff2')",
+            "unicodeRange": "U+0370-03FF"
+        },
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2) format('woff2')",
+            "unicodeRange": "U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB"
+        },
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2) format('woff2')",
+            "unicodeRange": "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720A7FF"
+        },
+        {
+            "fontFamily": "'Open Sans'",
+            "fontStyle": "normal",
+            "fontWeight": "400",
+            "src": "local('Open Sans Regular'), local('OpenSans-Regular'), url(/omniapp/resources/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2) format('woff2')",
+            "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+        }
+    ]
+}

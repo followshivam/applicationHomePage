@@ -1,0 +1,164 @@
+[
+  {
+    "value": [
+      {
+        "id": 0,
+        "name": "Average Processing time",
+        "status": "Good",
+        "average_time": "4.34s",
+        "last_opened": "Today at 3:31 AM",
+        "user": "sejal",
+        "time": "2:00AM",
+        "type": "Report",
+        "img_type":"report"
+      },
+      {
+        "id": 1,
+        "name": "Daily Customer onboarding time",
+        "status": "Running",
+        "average_time": "3.14s",
+        "last_opened": "Today at 10:21 AM",
+        "user": "Me",
+        "time": "6:40AM",
+        "type": "Report",
+        "img_type":"report"
+      },
+      {
+        "id": 2,
+        "name": "Monthly Reports",
+        "status": "Blocked",
+        "average_time": "3.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "Ram",
+        "time": "3:10PM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+      },
+      {
+        "id": 3,
+        "name": "Monthly onboarding Reports",
+        "status": "Blocked",
+        "average_time": "2.22s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "12:00AM",
+        "type": "Report",
+        "img_type":"report"
+      }
+    ]
+  },
+  {
+    "category": "Last Week",
+    "value": [
+      {
+        "id": 4,
+        "name": "onboarding Reports ",
+        "status": "Good",
+        "average_time": "1.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "Rohit",
+        "time": "4:00AM",
+        "type": "Report",
+        "img_type":"report"
+      },
+      {
+        "id": 5,
+        "name": " Reports",
+        "status": "Running",
+        "average_time": "4.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "5:44PM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+
+      },
+      {
+        "id": 6,
+        "name": "Monthly Reports",
+        "status": "Blocked",
+        "average_time": "2.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "4:00AM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+
+      },
+      {
+        "id": 7,
+        "name": "Monthly onboarding",
+        "status": "Blocked",
+        "average_time": "4.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "4:00AM",
+        "type": "Report",
+        "img_type":"report"
+
+      },
+      {
+        "id": 8,
+        "name": "Monthly ",
+        "status": "Running",
+        "average_time": "1.24s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "2:00AM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+      }
+    ]
+  },
+  {
+    "category": "Earlier",
+    "value": [
+      {
+        "id": 9,
+        "name": "onboarding Reports",
+        "status": "Good",
+        "average_time": "1.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "Rohit",
+        "time": "4:00AM",
+        "type": "Report",
+        "img_type":"report"
+      },
+      {
+        "id": 10,
+        "name": " Reports",
+        "status": "Running",
+        "average_time": "4.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "5:44PM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+      },
+      {
+        "id": 11,
+        "name": "Monthly Reports",
+        "status": "Blocked",
+        "average_time": "2.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "4:00AM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+      },
+      {
+        "id": 12,
+        "name": "Monthly Reports",
+        "status": "Blocked",
+        "average_time": "2.34s",
+        "last_opened": "Yesterday at 3:46 PM",
+        "user": "sejal",
+        "time": "4:00AM",
+        "type": "Schedule",
+        "img_type":"schedule_icon"
+      }
+     
+    ]
+  }
+ 
+]

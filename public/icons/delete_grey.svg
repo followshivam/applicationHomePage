@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="Delete_Blue" data-name="Delete / Blue" transform="translate(-7408 -6663)">
+    <path id="Path_80" data-name="Path 80" d="M0,0H16m0,16H0" transform="translate(7408 6663)" fill="none"/>
+    <path id="Path_82" data-name="Path 82" d="M0,0H16V16H0Z" transform="translate(7408 6663)" fill="none"/>
+    <g id="trash-2" transform="translate(7407.93 6663)">
+      <path id="Path_50736" data-name="Path 50736" d="M3,6H13.8" transform="translate(0 -1.486)" fill="none" stroke="#606060" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_50737" data-name="Path 50737" d="M12.658,4.595V12.8A1.151,1.151,0,0,1,11.564,14H6.094A1.151,1.151,0,0,1,5,12.8V4.595M6.641,4.4V3.2A1.151,1.151,0,0,1,7.735,2H9.923a1.151,1.151,0,0,1,1.094,1.2V4.4" transform="translate(-0.429 0)" fill="none" stroke="#606060" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_1296" data-name="Line 1296" y2="5" transform="translate(6.872 6.48)" fill="none" stroke="#606060" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_1297" data-name="Line 1297" y2="5" transform="translate(9.928 6.48)" fill="none" stroke="#606060" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

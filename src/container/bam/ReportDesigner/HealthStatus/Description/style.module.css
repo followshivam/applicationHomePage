@@ -1,0 +1,61 @@
+.bottomBar {
+  background-color: white;
+  top: auto;
+  bottom: 0;
+}
+.toolbar {
+  min-height: 40px;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.toolbarButtonContainer {
+  margin-top: 5px;
+  display: flex;
+  align-items: flex-end;
+}
+.cancelButton {
+  margin-right: 10px;
+}
+.mainContainer {
+  width: 1200px;
+}
+.dialogActions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.blockingConditionsText {
+  margin-left: 15px;
+}
+
+.blockingConditionsTextFont {
+  margin-left: 15px;
+  font-weight: 600;
+  color: #606060;
+}
+
+.noBlockingCondition {
+  margin-top: 10px;
+}
+
+.emailCard {
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: bisque;
+  width: fit-content;
+  margin-right: 10px;
+  background-color: #f8f8f8;
+}
+
+.emailContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.userNotify {
+  margin-top: -16px;
+}
+
+.tableContainer {
+  width: 70%;
+}

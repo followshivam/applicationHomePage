@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="Small_Eye_blue" data-name="Small Eye / blue" transform="translate(-9290 15510)">
+    <rect id="Rectangle_9807" data-name="Rectangle 9807" width="16" height="16" transform="translate(9290 -15510)" fill="none"/>
+    <g id="Group_51847" data-name="Group 51847" transform="translate(0 17.881)">
+      <path id="Path_52212" data-name="Path 52212" d="M0,8.5H0c2.055-3.175,8.945-3.175,11,0h0" transform="translate(9293 -15528)" fill="none" stroke="#0072c6" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+      <g id="Ellipse_2188" data-name="Ellipse 2188" transform="translate(9297 -15521)" fill="none" stroke="#0072c6" stroke-miterlimit="10" stroke-width="1">
+        <circle cx="2" cy="2" r="2" stroke="none"/>
+        <circle cx="2" cy="2" r="1.5" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

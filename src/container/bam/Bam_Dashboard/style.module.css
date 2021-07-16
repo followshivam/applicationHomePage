@@ -1,0 +1,76 @@
+
+.toolbar{
+  height:60px;
+  position: sticky;
+  top:0;
+  z-index: 22;
+}
+.child_toolbar1{
+  display:flex;
+  flex:1;
+  justify-content: space-between;
+  align-items: center;
+  height:30px;
+}
+
+.child1_toolbar_left{
+  display:flex;
+  flex:1;
+  justify-content: space-around;
+  align-items: center;
+  max-width:150px;
+}
+.child1_toolbar_right{
+  display:flex;
+  flex:1;
+  justify-content:flex-end;
+  margin-right:5px;
+  align-items: center;
+}
+.child_toolbar2
+{
+   display:flex;
+  flex:1;
+  justify-content: space-between;
+  align-items: center;
+  height:30px;
+}
+
+
+.child2_toolbar_left{
+ display:flex;
+  flex:1;
+  /*justify-content: space-around;*/
+  align-items: center;
+  /*max-width:270px;*/
+}
+
+.child2_toolbar_right{
+  display:flex;
+  flex:1;
+  justify-content:flex-end;
+  align-items: center;
+  padding-right: 18px;
+}
+.child2_toolbar_right>*{
+  margin-right:5px;
+}
+
+.tableWrap tr td{
+  padding-top:2px;
+  white-space: nowrap;
+  border-bottom: 1px solid #F8F8F8 !important;
+}   
+.tableWrap tr th{
+  white-space: nowrap;
+  padding-top:2px;
+  border-bottom: 1px solid #F8F8F8 !important;
+}
+.health_shape{
+  border-radius: 100px;
+  width:10px;
+  height:10px;
+  display:inline-block;
+  margin-right:5px;
+}
+

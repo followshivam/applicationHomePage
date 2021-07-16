@@ -1,0 +1,19 @@
+.LeftNavbar{
+    min-width:7em;
+    width:5em;
+    background: #202020;
+    height: calc(100vh - 2.5em);
+}
+.LeftNavbar .tab{
+    color:ivory;
+    height:5em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    font-size: 12px;
+}
+.LeftNavbar .activeTab{
+    background: #333333;
+    border-left: 8px solid #ce8414;
+}

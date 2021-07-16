@@ -1,0 +1,10 @@
+<svg id="Data_Object" data-name="Data Object" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="credit-card" transform="translate(0.648 -0.617)">
+    <g id="Rectangle_13817" data-name="Rectangle 13817" transform="translate(1.35 3.618)" fill="none" stroke="#606060" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+      <rect width="12" height="10" rx="2" stroke="none"/>
+      <rect x="0.5" y="0.5" width="11" height="9" rx="1.5" fill="none"/>
+    </g>
+    <line id="Line_2502" data-name="Line 2502" x2="10.499" transform="translate(2.351 7.618)" fill="none" stroke="#606060" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+  </g>
+  <rect id="Rectangle_13818" data-name="Rectangle 13818" width="16" height="16" fill="none"/>
+</svg>

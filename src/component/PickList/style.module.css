@@ -1,0 +1,92 @@
+
+.picklist_container{
+     margin-top: 0px;
+  margin-left: 30px;
+  max-width: 250px;
+  width:220px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  height: 280px;
+   position: absolute;
+   background-color: white;
+      /*max-width: 250px;*/
+  /*width:220px;
+  height: 60px;*/
+  border-radius: 5px;
+  padding: 5px;
+}
+/*.picklist_container::-webkit-scrollbar {
+  width: 2px !important;
+  height:2px !important;
+}*/
+.header{
+    height:30px;
+    background: #00a1cc;
+}
+.close{
+    float:right;
+
+    color:black;
+  margin: -30px -28px;
+  height:30px;
+
+  /*background-color: #57a9d9;*/
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  font-weight:6000px;
+  font-size:20px;
+  
+}
+.close:hover{
+    color:black;
+ box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+.list_tag {
+
+  list-style-type: none;
+   overflow: auto;
+   height:270px;
+     margin:0px;
+  padding:0;
+  margin-top:0px;
+  background-color: white;
+
+}
+
+.list_tag li {
+  /*padding: 0 5px;*/
+  margin-left: -35px;
+  
+}
+
+.list_tag li a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding:5px 0;
+  transition: all 0.3s ease-out;
+  border-bottom: 1px solid #e6e8ea;
+}
+
+.list_tag li:last-of-type a {
+  border: none;
+}
+
+.list_tag li i {
+  margin-right: 5px;
+  color: inherit;
+  vertical-align: middle;
+}
+
+/* Hover state */
+
+.list_tag li:hover {
+
+  background: #57a9d9
+}

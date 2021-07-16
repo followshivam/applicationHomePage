@@ -1,0 +1,17 @@
+.header{      
+     display: flex;
+    flex:1;
+    height:40px;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+        -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    }
+.header>*:first-child{
+    margin-left: 8px;
+}
+.header>*:last-child{
+    margin-right: 8px;
+}
