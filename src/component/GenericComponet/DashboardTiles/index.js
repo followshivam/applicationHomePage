@@ -107,7 +107,7 @@ export default function DashboardTile(props) {
     const classes = useStyles({ height, width, imgHeight, imgWidth, direction });
 
     return (
-        <div className={classes.tile_container} style={{ direction: direction }}>
+        <div className={classes.tile_container} style={{ direction: direction, padding:"15px 0" }}>
             {tileList && tileList.map((res, key) => {
                 return (
                     // <StyledTooltip title={(res.description?.label != '' && res.description?.label != undefined) ? (`${res.description?.label}: ${res.description?.value}`) : `${res.description?.value}`}>

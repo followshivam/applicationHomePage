@@ -18,9 +18,7 @@ import {
     useTranslation,
     IconImage,
     Dropdown,
-    Typography,
-    EmptyHome,
-    NotFound
+    Typography
 } from "component";
 
 import {HomeTiles} from 'global/bam/api/ApiMethods'
@@ -873,19 +871,13 @@ function App() {
                 giveMeDrawerState={setDrawerState}
                 expand={defaultValues.default_navigation === "E"}/> {/* <Home/> */}
             
-            <div style={{display:"flex",flexDirection:"column", padding:"15px 5px"}}>
+            <div style={{display:"flex",flexDirection:"column", padding:"15px 5px",background:"#eeeeee"}}>
                 <DashboardTile
                     tileList={homeTiles}
                     direction={`${t('bam:HTML_DIR')}`}
                     width={'180pt'}/>
 
-                <div>
-                    <NotFound />
-                    
-                    <EmptyHome />
-                </div>    
-
-                {/* <Pinned
+                <Pinned
                     pinnedData={pinnedData}
                     headerData={HeadCells}
                     action={Action}
@@ -920,7 +912,7 @@ function App() {
                     imageInfo={{
                     path: `${process.env.REACT_APP_CONTEXT_PATH}/icons/`,
                     ext: '.svg'
-                }}/> */}
+                }}/>
 
             </div>
 

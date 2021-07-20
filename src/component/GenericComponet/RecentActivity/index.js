@@ -229,7 +229,7 @@ const RecentActivity = (props) => {
       ) :
         <div className={classes.subRoot}>
 
-          <div id={isSticky ? "myHeader" : ""} className={goingUp ? classes.sticky : classes.header}>
+          <div id={isSticky ? "myHeader" : ""} className={goingUp ? classes.header : classes.header}>
             {heading !== '' ? <Typography className={classes.title} noWrap={true} > {heading}</Typography> : null}
             <div className={classes.headerRightWrapper}>
               {isSearch ?
