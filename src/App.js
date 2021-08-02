@@ -28,8 +28,17 @@ import DynamicStyledTab from "component/DynamicStyledTab";
 import Home from "container/Home"
 
 import {useDispatch, useSelector} from "react-redux";
+import axios from "axios";
 
 import {GlobalSettings, LogoutDetails, SetRegexDetails} from "redux/action";
+
+// var pinnedData={}
+
+// axios.get("http://192.168.160.49:8081/launchpad/pinnedList/appDesigner")
+// .then(res=>{
+//     pinnedData=res.data
+//     }
+// )
 
 const pinnedData = require('./newData.json')
 const listData = require('./data.json')
@@ -879,13 +888,13 @@ function App() {
                     direction={`${t('bam:HTML_DIR')}`}
                     width={'180pt'}/>
 
-                <div>
+                {/* <div>
                     <NotFound />
                     
                     <EmptyHome />
-                </div>    
+                </div>     */}
 
-                {/* <Pinned
+                <Pinned
                     pinnedData={pinnedData}
                     headerData={HeadCells}
                     action={Action}
@@ -920,7 +929,7 @@ function App() {
                     imageInfo={{
                     path: `${process.env.REACT_APP_CONTEXT_PATH}/icons/`,
                     ext: '.svg'
-                }}/> */}
+                }}/>
 
             </div>
 
