@@ -53,7 +53,8 @@ const useStyle = makeStyles((theme) => ({
     },
     labelClose: {
         fontSize: "12px",
-        color: 'white'
+        color: 'white',
+        textTransform:"capitalize"
     },
     labelOpen: {
         fontSize: "12px",
@@ -67,7 +68,8 @@ const useStyle = makeStyles((theme) => ({
     },
     active_tab: {
         background: "#424242 0% 0% no-repeat padding-box",
-        borderLeft: `4px solid ${theme.palette.omniapp_color}`,
+        borderLeft:"4px solid #F86600",
+        // borderLeft: `4px solid ${theme.palette.omniapp_color}`,
         transition: "all 0.1s ease-in",
     },
     primary: {
@@ -179,12 +181,12 @@ const Sidebar = props => {
                         {/* //* for Dwrawer Open and close Drawer */}
                         {
                             !isDwrawerOpen
-                                ? <>
-                                    <Avatar variant="circular" className={classes.primary} style={{ width: '31px', height: '30px', margin: 'auto' }}>
-                                        <AddIcon style={{ height: "20px", width: "20px", color: "white" }} />
-                                    </Avatar>
-                                    <Typography className={classes.labelClose} style={{ paddingTop: '3px' }}>{t('bam:CREATE')}</Typography>
-                                </>
+                                ? <div onClick={()=>props.setActiveScreen("newApplication")}>
+                                        <Avatar variant="circular" className={classes.primary} style={{ width: '31px', height: '30px', margin: 'auto' ,background:"#F86600" }}>
+                                            <AddIcon style={{ height: "20px", width: "20px", color: "white" }} />
+                                        </Avatar>
+                                        <Typography className={classes.labelClose} style={{ paddingTop: '3px' }}>{t('bam:CREATE')}</Typography>
+                                    </div>
                                 : <div
                                     style={{
                                         minWidth: '217px',
@@ -195,7 +197,7 @@ const Sidebar = props => {
                                         background: '#F46A0F',
                                         marginLeft: '-2px',
                                     }}>
-                                    <Typography className={classes.labelOpen} style={{ padding: 0 }}> + {t('bam:CREATE')}</Typography>
+                                    <Typography className={classes.labelOpen} style={{ padding: 0 }} > + {t('bam:CREATE')}</Typography>
                                 </div>
                         }
 
@@ -205,7 +207,8 @@ const Sidebar = props => {
 
                 {sidebar_list.map((res, index) => {
 
-                    const checkActive = res[valueKey] == active ? true : false;
+                    const checkActive = res[labelKey] == active ? true : false;
+                    
                     return (
                         <React.Fragment key={index}>
                             <ListItem button
@@ -216,14 +219,20 @@ const Sidebar = props => {
                                 // onClick={() => clickHandler(res.id)}
                                 onClick={(event) => {
                                     if (sidebarStructure === "TREES") {
-                                        if (tabsArray.length <= 1)
+                                        if (tabsArray.length <= 1){
                                             clickHandler(res[valueKey])
-                                        else
+                                            props.setActiveScreen(res[labelKey])
+                                        }
+                                        else{
                                             if (!isDwrawerOpen) setAnchorEl(event.currentTarget)
                                             else setSubListCollapse(subListCollapse === index ? -1 : index)
+                                            props.setActiveScreen(res[labelKey])
+                                        }
                                     }
-                                    else
+                                    else{
                                         clickHandler(res[valueKey])
+                                        props.setActiveScreen(res[labelKey])
+                                    }
                                 }}
                             >
                                 <ListItemIcon className={classes.listIcon}>

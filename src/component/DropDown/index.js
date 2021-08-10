@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   MuiListItemIcon: {
-    minWidth: theme.spacing(3)
+    minWidth: theme.spacing(3)    
   },
   icon: {
     marginRight: theme.spacing(2),
@@ -43,8 +43,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   MuiListItem: {
+    height:"28px",
     root: {
+      height:"28px",
       '&:focus': {
+        height:"28px",
         backgroundColor: theme.palette.primary.main,
         '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
           color: theme.palette.common.white,
@@ -52,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     '&:hover': {
+      height:"28px",
       backgroundColor: theme.palette.primary.main,
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
         color: theme.palette.common.white,
@@ -138,10 +142,13 @@ const DropDown = (props) => {
       {list_type === "" ? (list.map((res, key) => {
         return (
           <MenuItem onClick={handleClose} classes={{ root: [classes.MuiListItem, res.className].join(' ') }} key={key} onClick={() => { handleClose(); return res.action != null ? res.action() : null }} disabled={res.disabled != null ? res.disabled : false}>
-            {res.startIcon != null && <ListItemIcon classes={{ root: classes.MuiListItemIcon }} >
+            {res.startIcon != null && 
+            
+            <ListItemIcon classes={{ root: classes.MuiListItemIcon }} >
               <IconImage url={res.startIcon} height={res.iconHeight != null ? res.iconHeight : height } width={res.iconWidth != null ? res.iconWidth : width} />
             </ListItemIcon>}
             <ListItemText primary={res.label} primaryTypographyProps={{ variant: "subtitle2", style: { fontSize: res.labelFontSize , color: res.labelColor} }} />
+          
           </MenuItem>)
       }))
         : list.map((res, key) => {

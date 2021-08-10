@@ -86,14 +86,14 @@ const useStyles = makeStyles((theme) => ({
             alignItems: 'center'
         },
         "& .MuiIconButton-root": {
-            margin: "0 12px"
+            // margin: "0 12px"
         },
         "& .MuiSvgIcon-root": {
             width: "21px",
             height: "21px",
             '&:last-child': {
                 width: "29px",
-                height: "29px",
+                height: "29px"
             }
         },
         '& img': {
@@ -102,7 +102,8 @@ const useStyles = makeStyles((theme) => ({
             '&:last-child': {
                 width: "29px",
                 height: "29px",
-                marginLeft: theme.spacing(0.5)
+                marginLeft: theme.spacing(0.5),
+                padding:"12px"
             }
         },
         '& .MuiBadge-badge': {
@@ -118,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
         background: "#FFFFFF 0% 0% no-repeat",
         borderBottom: "2px solid #FF6600",
         zIndex: theme.zIndex.drawer + 1,
-        height: "55px",
+        height: "48px",
         boxShadow: 'none',
     }
 }));
@@ -145,19 +146,22 @@ const useHeaderSelectStyles = makeStyles((theme) => ({
     const open = Boolean(anchorEl);
 
     const onClickListHandler = (item) => {
+        console.log(item);
         if (item.id !== active.id) {
             setCurrentWorkSpace(item)
             onChangeWorkSpace(item)
             setAnchorEl(null)
         }
+        props.setActive(item)
     }
+    
 
     return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                 onClick={(event) => setAnchorEl(event.currentTarget)}
             >
-                <Typography className={classes.headTitle}>{currentWorkSpace.name}</Typography>
+                <Typography className={classes.headTitle}>{active.name}</Typography>
                 <ArrowDropDownIcon fontSize="large" style={{ fill: '#000' }} />
             </div>
 
@@ -206,7 +210,7 @@ const MainHeader = (props) => {
     return (
         <div className={classes.appBar}>
             {/* <AppBar position="static" className={classes.appBar}> */}
-            <Toolbar style={{ minHeight: '55px' }}>
+            <Toolbar style={{ minHeight: '48px',padding:"0 0 0 10px" }}>
                 <img
                     src="https://landing.newgensoft.com/hs-fs/hubfs/Newgen%20Favicon%20White%20BG.png?width=108&height=108"
                     alt="logo"
@@ -219,7 +223,7 @@ const MainHeader = (props) => {
                     style={{ height: "44px", width: "1.5px", marginRight: "20px" }}
                 />
 
-                <HeaderSelectDropdown workspaceList={workspaceList} active={active} onChangeWorkSpace={onChangeWorkSpace} />
+                <HeaderSelectDropdown setActive={props.setActive} workspaceList={workspaceList} active={active} onChangeWorkSpace={onChangeWorkSpace} />
 
                 <div className={classes.grow} />
                 {/* <div className={classes.search}>
@@ -252,7 +256,7 @@ const MainHeader = (props) => {
                         </Badge>
                     </IconButton>
 
-                    <img src={`${process.env.REACT_APP_CONTEXT_PATH}/icons/user_icon.svg`} onClick={(event) => setProfileAnchorEl(event.currentTarget)} />
+                    <img className={classes.avatar} src={`${process.env.REACT_APP_CONTEXT_PATH}/icons/user_icon.svg`} onClick={(event) => setProfileAnchorEl(event.currentTarget)} />
 
                     <Popover
                         open={isprofilePopoverOpen}

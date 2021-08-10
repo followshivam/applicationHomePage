@@ -8,7 +8,6 @@ import { Spinner } from 'component/Loader';
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    background:"#F8F8F8"
   },
   subRoot: {
     width: "100%",
@@ -63,7 +62,6 @@ const useStyles = makeStyles(theme => ({
     height: "30px",
     flex: 1,
     paddingTop: "4px",
-    textAlign:"left"
   },
 
   icon: {
@@ -74,7 +72,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: "12px",
     fontWeight: "600",
     margin: props => props.direction === 'rtl' ? "15px 53px 15px 0" : "15px 0 15px 53px",
-    textAlign:"left"
 
   },
   title: {
@@ -159,15 +156,15 @@ const RecentActivity = (props) => {
 
         obj1 = {
           img_type: valueItem.img_type,
-          component: <div style={{ display: 'grid', gridTemplateColumns:"4fr 2fr 2fr 3fr 1fr", alignItems: 'center', flex: 1 }}>
+          component: <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flex: 1 }}>
             {arCom.map((item, index) => {
               if (haveAction === false) {
-                return <div key={index} style={{ minWidth: index+1===arCom.length ? null : null, flex: "1" }} > {item}</div>
+                return <div key={index} style={{ minWidth: "150px", flex: "1" }} > {item}</div>
               }
               else {
 
                 return <div key={index}
-                  style={{ display: "flex", flex: "1", minWidth: index+1===arCom.length ? null : null, justifyContent: (index + 1) === headerData.length ? "flex-end" : '' }} > {item}</div>
+                  style={{ display: "flex", flex: "1", minWidth: "150px", justifyContent: (index + 1) === headerData.length ? "flex-end" : '' }} > {item}</div>
               }
             })}</div>
         }
@@ -184,7 +181,6 @@ const RecentActivity = (props) => {
 
   useEffect(() => {
     const header = document.getElementById("myHeader");
-    console.log(header);
     const sticky = header.offsetTop - 55;
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (isSticky) {
@@ -234,7 +230,7 @@ const RecentActivity = (props) => {
         <div className={classes.subRoot}>
 
           <div id={isSticky ? "myHeader" : ""} className={goingUp ? classes.header : classes.header}>
-            <Typography className={classes.title} noWrap={true} > {heading !== '' ?  heading : null} </Typography> 
+            {heading !== '' ? <Typography className={classes.title} noWrap={true} > {heading}</Typography> : null}
             <div className={classes.headerRightWrapper}>
               {isSearch ?
                 <SearchBox
@@ -248,7 +244,6 @@ const RecentActivity = (props) => {
                 />
                 : null}
             </div>
-            
             <div className={classes.heading} >
               {
                 (imageInfo.path === undefined) ? null
@@ -257,7 +252,7 @@ const RecentActivity = (props) => {
                   </div>
 
               }
-              <div style={{ display: 'grid', gridTemplateColumns:"4fr 2fr 2fr 3fr 1fr", alignItems: 'center', flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flex: 1 }}>
                 {headerData.map((item, index) => (
                   <Typography className={classes.headingText} key={index} noWrap={true}>{item.category}</Typography>
                 ))}
@@ -278,7 +273,7 @@ const RecentActivity = (props) => {
                           {(imageInfo.path === undefined)
                             ? null
                             : (<div style={{ margin: direction === 'rtl' ? "0 10px 0 16px" : "0 20px 0 10px", alignItems: 'center' }}>
-                              <img src={`${process.env.REACT_APP_CONTEXT_PATH}/icons/schedule_icon.svg`} alt="file" />
+                              <img src={`${imageInfo.path}${res.img_type}${imageInfo.ext}`} alt="file" />
                             </div>)}
                           {res.component}
                         </div>

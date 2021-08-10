@@ -53,14 +53,14 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: props => props.direction === "rtl" ? '0 4px 4px 0' : '4px 0px 0px 4px',
     },
     root_tile_right: {
-        padding: '7.5px 16px',
+        padding: '6px 16px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
     },
     tile_title: {
         textAlign: props => props.direction === "rtl" ? 'right' : 'left',
-        font: 'normal normal 900 24px/33px Open Sans',
+        font: 'normal normal bold 24px/33px Open Sans',
         letterSpacing: '0px',
         color: '#000000',
         opacity: 1,
@@ -80,11 +80,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '10px',
         color: '#606060',
         lineHeight: '10px',
-    },
-    tile_subtitle:{
-        fontSixe:"14px !important",
-        fontWeight:"600",
-        color:"#606060"
     }
 }));
 
@@ -93,7 +88,7 @@ export default function DashboardTile(props) {
 
     const {
         tileList = [],
-        height = "",
+        height = "54pt",
         width = "165pt",
         imgHeight = 30,
         imgWidth = 30,
@@ -111,59 +106,8 @@ export default function DashboardTile(props) {
 
     const classes = useStyles({ height, width, imgHeight, imgWidth, direction });
 
-    const tileData_arr=[
-        {
-            "image":`${process.env.REACT_APP_CONTEXT_PATH}/icons/blocked.svg`,
-            "backgroundColor":"#d53d3d80",
-            "title":"Draft"
-        },
-        {
-            "image":`${process.env.REACT_APP_CONTEXT_PATH}/icons/report_average.svg`,
-            "backgroundColor":"#0072C629",
-            "title":"Approval Pending"
-        },
-        {
-            "image":`${process.env.REACT_APP_CONTEXT_PATH}/icons/report_good.svg`,
-            "backgroundColor":"#0d6f0829",
-            "title":"Published"
-        }
-    ]
-
-    // const getImageUrl= (tileArray,key)=>{
-    //     switch (key){
-    //         case 0:
-    //             return `${process.env.REACT_APP_CONTEXT_PATH}/icons/blocked.svg`
-    //         case 1:
-    //             return `${process.env.REACT_APP_CONTEXT_PATH}/icons/report_average.svg`
-    //         case 2:
-    //             return `${process.env.REACT_APP_CONTEXT_PATH}/icons/report_good.svg`
-    //     }
-    // }
-
-    // const getImageBackground= (tileArray,key) =>{
-    //     switch (key){
-    //         case 0:
-    //             return "#d53d3d80"
-    //         case 1:
-    //             return "#0072C629"
-    //         case 2:
-    //             return "#0d6f0829"
-    //     }
-    // }
-
-    // const getTileLabel= (tileArray,key) =>{
-    //     switch (key){
-    //         case 0:
-    //             return "Draft"
-    //         case 1:
-    //             return "Approval Pending"
-    //         case 2:
-    //             return "Published"
-    //     }
-    // }
-
     return (
-        <div className={classes.tile_container} style={{ direction: direction, padding:"15px 0 25px" }}>
+        <div className={classes.tile_container} style={{ direction: direction, padding:"15px 0" }}>
             {tileList && tileList.map((res, key) => {
                 return (
                     // <StyledTooltip title={(res.description?.label != '' && res.description?.label != undefined) ? (`${res.description?.label}: ${res.description?.value}`) : `${res.description?.value}`}>
@@ -173,17 +117,12 @@ export default function DashboardTile(props) {
                             if (onClickHandler !== null)
                                 onClickHandler(res)
                         }}>
-
-                        <div className={classes.root_tile_left} style={{ backgroundColor: tileData_arr[key].backgroundColor }}>
-                            <img src={tileData_arr[key].image} width={imgWidth} height={imgHeight} />
+                        <div className={classes.root_tile_left} style={{ backgroundColor: res.img_info.background_color }}>
+                            <img src={res.img_info?.url} width={imgWidth} height={imgHeight} />
                         </div>
-
                         <div className={classes.root_tile_right}>
-                            <Typography className={classes.tile_title}>{res.length}</Typography>
-                            <div className={classes.tile_subtitle}>
-                                {tileData_arr[key].title}
-                            </div>
-                            {/* <div style={{ direction: props.direction, display: 'flex' }}>
+                            <Typography className={classes.tile_title}>{res.title}</Typography>
+                            <div style={{ direction: props.direction, display: 'flex' }}>
                                 {
                                     (res.description?.label != '' && res.description?.label != undefined) &&
                                     <Typography className={classes.tile_description} style={{ fontWeight: 300 }} noWrap={true}>{res.description?.label}</Typography>
@@ -192,10 +131,9 @@ export default function DashboardTile(props) {
                                     (res.description?.value != '' && res.description?.value != undefined) &&
                                     <Typography className={classes.tile_description} noWrap={true}>{(res.description?.label ? ": " : "") + res.description.value}</Typography>
                                 }
-                            </div> */}
-                            {/* {res?.description?.subLabel && <Typography className={classes.tile_subDesc}>{res.description.subLabel}</Typography>} */}
+                            </div>
+                            {res?.description?.subLabel && <Typography className={classes.tile_subDesc}>{res.description.subLabel}</Typography>}
                         </div>
-
                     </div>
                     // </StyledTooltip>
                 )

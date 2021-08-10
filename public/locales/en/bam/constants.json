@@ -1275,5 +1275,11 @@
    "SELECT": "Select",
    "PLEASE_SELECT": "Please Select",
    "SELECT_ALL": "Select All",
-   "ITEM_SELECTED": "item Selected"
+   "ITEM_SELECTED": "item Selected",
+   "Last Modified":"Last Modified",
+   "Pinned":"Pinned",
+   "View Less":"View Less",
+   "Recents":"Recents",
+   "Last Opened":"Last Opened",
+   "View All":"View All"
 }

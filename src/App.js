@@ -10,6 +10,7 @@ import {
     MainHeader,
     Sidebar,
     Spinner,
+    SearchBox,
     DynamicSidebar,
     Pinned,
     RecentActivity,
@@ -20,19 +21,25 @@ import {
     Dropdown,
     Typography,
     EmptyHome,
-    NotFound
+    NotFound,
+    BlueButton,DullButton,LitButton
 } from "component";
 
 import {HomeTiles} from 'global/bam/api/ApiMethods'
 import DynamicStyledTab from "component/DynamicStyledTab";
 import Home from "container/Home"
 
+import NewApplication from './NewApplication';
+import CreateNewPopup from "CreateNewPopup";
+import CreateNewCategory from "./CreateNewCategory";
+import Applications from "./Applications"
+
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 
 import {GlobalSettings, LogoutDetails, SetRegexDetails} from "redux/action";
-
-// var pinnedData={}
+import { uuid } from 'uuidv4';
+import moment from "moment";
 
 // axios.get("http://192.168.160.49:8081/launchpad/pinnedList/appDesigner")
 // .then(res=>{
@@ -40,7 +47,9 @@ import {GlobalSettings, LogoutDetails, SetRegexDetails} from "redux/action";
 //     }
 // )
 
-const pinnedData = require('./newData.json')
+
+
+// const pinnedData = require('./newData.json')
 const listData = require('./data.json')
 
 const tabHeight = 42
@@ -55,7 +64,8 @@ const useStyles = makeStyles(theme => ({
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen
             }),
-        background: "white"
+        background: "white",
+        boxShadow:"none"
     },
     buttonWrapper: {
         margin: " 7px 3px 7px 1118px",
@@ -99,10 +109,26 @@ const useStyles = makeStyles(theme => ({
     },
     primary: {
         background: theme.palette.primary.main
-    }
+    },
+
 }));
 
+console.log();
+
 function App() {
+
+    const [activeScreen,setActiveScreen]=useState("applications");
+    const [createNew_PopUp,setCreateNew_PopUp]=useState("closed");
+    const [createCategory_PopUp,setCreateCategory_PopUp]=useState("closed");
+
+    const [allApplication,setAllApplication]=useState([]);
+    const [allCategories,setAllCategories]=useState([]);
+    const [pinnedData,setPinnedData]=useState();
+    const [recentData,setRecentData]=useState();
+
+    const [categoryWiseApps,setCategoryWiseApps]=useState();
+    const [statusWiseApps,setStatusWiseApps]=useState();
+
     const dispatch = useDispatch();
     const classes = useStyles();
     const [currentWorkSpace,
@@ -125,6 +151,8 @@ function App() {
         setIsLoading] = useState({msg: "Loading...", loading: true});
     const [homeTiles,
         setHomeTiles] = useState([]);
+    const [tilesDataArr,
+        setTilesDataArr] = useState([]);
     const [direction,
         setDirection] = useState('ltr')
     const [tabsList,
@@ -360,19 +388,21 @@ function App() {
         {
             component: () => (
                 <div style={{
-                    display: 'flex'
+                    display: 'flex',
+                    position:"relative"
                 }}>
-                    <div style={{
-                        marginRight: '8px'
+                    {/* <div style={{
+                        marginRight: '8px',
+                        position:"absolute"                        
                     }}>
                         {' '}
                         <IconImage
                             url={`${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned.svg`}
-                            height={17}
-                            width={17}
+                            height={12}
+                            width={12}
                             onClick={() => console.log('pin clicked')}/>{' '}
-                    </div>
-                    <div>
+                    </div> */}
+                    <div style={{transform:"rotate(90deg)" ,position:"absolute",right:"-0.5em"}}>
                         {' '}
                         <Dropdown
                             type='icons'
@@ -381,13 +411,25 @@ function App() {
                             {
                                 id: 1,
                                 value: 'Demo Data',
-                                label: `Demo Data`,
-                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/show_query.svg`
+                                label: `Edit`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_edit.svg`
                             }, {
                                 id: 2,
                                 value: 'Demo Data',
-                                label: `Demo Data`,
-                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/grey_export.svg`
+                                label: `Download`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_download.svg`
+                            },
+                            {
+                                id: 2,
+                                value: 'Demo Data',
+                                label: `Unpin`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_unpin.svg`
+                            },
+                            {
+                                id: 2,
+                                value: 'Demo Data',
+                                label: `Delete`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_delete.svg`
                             }
                         ]}/>
                     </div>
@@ -396,10 +438,208 @@ function App() {
         }
     ]
 
+    const getCategories= () =>{
+        axios.get("http://localhost:8080/getCategories")
+        .then(res=>{
+            setAllCategories(res.data);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+
+    const getApplications= ()=>{
+        axios.get("http://localhost:8080/applications")
+        .then(res =>{
+            setAllApplication(res.data);
+
+            var filteredPinned=[];
+            (res.data).map(application=>{
+                if(application.pinned==="true"){
+                    filteredPinned.push(application);
+                }
+            })
+
+            setPinnedData(filteredPinned);
+            // console.log(res.data);
+            // console.log(filteredPinned);
+        })
+        .catch((err)=>{
+            console.log(err);
+            // pinnedData = require('./newData.json')
+        })
+    }
+        
+    const [newApplication,setNewApplication]=useState({
+                id:uuid(),
+                name:"",
+                description:"",
+                type:"report",
+                status:"draft",
+                pinned:"true",
+			    editedBy:"shivam",
+                lastOpened:moment().toString().substring(0,24),
+                last_modified:moment().toString().substring(0,24),
+                average_time:"0:01 hrs",
+                user:"goldy",
+                time:new Date().toLocaleTimeString(),
+                img_type:"none",
+                pwa:"false"
+    });
+    
+    const [newCategory,setNewCategory]=useState({
+        id:uuid(),
+        name:"",
+        description:"",
+    });
+   
+    const addApplication= () => {
+        axios.post("http://localhost:8080/application/add",newApplication)
+        .then(res =>{
+            console.log(res.data)
+            getApplications();
+            getHomeTiles();
+            setNewApplication((prev)=>{
+                return{
+                    ...prev,["name"]:"",["description"]:""
+                }
+            })
+        })
+        .catch(err =>{
+            console.log(err);
+        })
+    }    
+
+    const addCategory= () =>{
+        axios.post("http://localhost:8080/category/add",newCategory)
+        .then(res =>{
+            getCategories();
+            // console.log(res.data)
+            // getApplications();
+            // getHomeTiles();
+            setNewCategory((prev)=>{
+                return{
+                    ...prev,["name"]:"",["description"]:""
+                }
+            })
+        })
+        .catch(err =>{
+            console.log(err);
+        })
+    }
+
     useEffect(() => {
+        getCategories();
+        getApplications();
         getHomeTiles();
+        
         setDirection(`${t('bam:HTML_DIR')}`)
     }, [])
+
+    useEffect(()=>{
+        var draft=[];
+        var pending=[];
+        var published=[];
+
+        if(allApplication?.[0]?.status){
+
+            allApplication.map(application=>{
+            switch (application.status){
+                case "draft":
+                    draft.push(application);
+                    break;
+                case "pending":
+                    pending.push(application);
+                    break;
+                case "published":
+                    published.push(application);
+                    break;
+            }
+        })
+        
+        setTilesDataArr([draft,pending,published])
+    }
+
+    },[allApplication])
+
+    useEffect(()=>{
+        var recent=[];
+        var weekAgo=[];
+        var monthAgo=[];
+
+        // var admission = moment('Wed Aug 04 2021 16:23:52'); 
+        // var discharge = moment('Mon Aug 09 2021 16:23:52');
+        // const dayssz=discharge.diff(admission, 'days');
+        // console.log(dayssz);
+
+        if(allApplication?.[0]?.lastOpened){
+
+            allApplication.map(application=>{
+                var today = moment(moment().toString().substring(0,24)); 
+                var lastOpened = moment(application.lastOpened);
+                const difference=today.diff(lastOpened, 'days');
+                
+                if(difference<=1){
+                    recent.push(application);
+                }
+                else if(difference>1 && difference<=7){
+                    weekAgo.push(application);
+                }
+                else if(difference>7){
+                    monthAgo.push(application);
+                }
+            })        
+
+            const recentArray=[
+                {"category": "","value":recent},
+                {"category": "Last week","value":weekAgo},
+                {"category": "Earlier","value":monthAgo}
+            ]
+            setRecentData(recentArray);        
+        }
+    },[allApplication])    
+
+    useEffect(()=>{
+        if(allCategories.length!==0 && allApplication.length!==0 ){
+
+            const catogoryWiseApplications={
+            }
+
+            allCategories.map(category=>{
+                catogoryWiseApplications[category.name]=[];
+            })
+
+            allApplication.map(application=>{
+                var exists=allCategories.some(function(category){
+                    return category.name===application.type
+                });
+                if(exists){
+                    catogoryWiseApplications[application.type].push(application);
+                }
+            })
+
+            setCategoryWiseApps(catogoryWiseApplications);  
+        }
+    },[allApplication, allCategories])
+
+    useEffect(()=>{
+        if(tilesDataArr && tilesDataArr.length!==0 && pinnedData && pinnedData.length!==0){
+            const json={
+                "draft":[],
+                "pending":[],
+                "approved":[],
+                "pinned":[]
+            }
+
+            json["draft"]=tilesDataArr[0];
+            json["pending"]=tilesDataArr[1];
+            json["approved"]=tilesDataArr[2];
+            json["pinned"]=pinnedData;
+
+            setStatusWiseApps(json);
+        }
+        
+    },[tilesDataArr,pinnedData])    
 
     const RecentHeadCells = [
         {
@@ -409,7 +649,7 @@ function App() {
                     style={{
                     display: 'flex',
                     flexWrap: 'wrap',
-                    height: '45px',
+                    minHeight: '45px',
                     minWidth: "150px",
                     overflow: "hidden",
                     whitespace: "nowrap",
@@ -418,22 +658,49 @@ function App() {
                         ? '0 0 0 10px'
                         : '0 10px 0 0'
                 }}>
-                    <Typography variant='subtitle1' noWrap={true} style={{
+                    <Typography variant='subtitle1' noWrap={false} style={{
                             fontSize: '12px',
-                            color: '#606060'
+                            color: '#000',
+                            font: "normal normal normal 12px/17px Open Sans",
+                            textTransform:"capitalize",
+                            textAlign:"left"
                         }}>
                         {item.name}
                         <Typography
                             variant='subtitle1'
                             noWrap={true}
                             style={{
-                            fontSize: '12px',
-                            color: '#606060'
+                            fontSize: '11px',
+                            color: '#606060',
+                            letterSpacing: "0px"
                         }}>
-                            {item.version}
-                            {item.type}
+                            <img src={`${process.env.REACT_APP_CONTEXT_PATH}/icons/audit.svg`} alt="file" /> 
+                            {/* {item.version} */}
+                            &nbsp;{item.type}
                         </Typography>
                     </Typography>
+                </div>
+            )
+        },{
+            category: 'Owner',
+            component: item => (
+                <div>
+                    <div style={{
+                        display: 'flex'
+                    }}>
+                        
+                        <Typography
+                            variant='subtitle1'
+                            noWrap={true}
+                            style={{
+                            fontSize: '12px',
+                            color: '#000000',
+                            marginLeft: '2px',
+                            textTransform:"capitalize"
+                        }}>
+                            {item.user}
+                        </Typography>
+                    </div>
                 </div>
             )
         }, {
@@ -443,24 +710,25 @@ function App() {
                     <div style={{
                         display: 'flex'
                     }}>
-                        {item.status === 'Good' || item.status === 'Enable'
-                            ? (<IconImage
+                        {item.status === 'published' || item.status === 'Enable'
+                            ? (<IconImage style={{padding:"0"}}
                                 url={`${process.env.REACT_APP_CONTEXT_PATH}/icons/good.svg`}
                                 height={10}/>)
-                            : item.status === 'Running'
-                                ? (<IconImage
+                            : item.status === 'draft'
+                                ? (<IconImage style={{padding:"0"}}
                                     url={`${process.env.REACT_APP_CONTEXT_PATH}/icons/running.svg`}
                                     height={10}/>)
-                                : (<IconImage
+                                : (<IconImage style={{padding:"0"}}
                                     url={`${process.env.REACT_APP_CONTEXT_PATH}/icons/block.svg`}
                                     height={10}/>)}
                         <Typography
                             variant='subtitle1'
                             noWrap={true}
                             style={{
-                            fontSize: '11px',
-                            color: '#606060',
-                            marginLeft: '2px'
+                            fontSize: '12px',
+                            color: '#000000',
+                            marginLeft: '2px',
+                            textTransform:"uppercase"
                         }}>
                             {item.status}
                         </Typography>
@@ -473,9 +741,14 @@ function App() {
                         color: '#606060',
                         marginLeft: '2px'
                     }}>
-                        {item.status === 'Running'
-                            ? `Next Run:`
-                            : `Average Time :`}{' '} {item.average_time}
+                        {item.status === 'pending'
+                            ? `Sent for approval on ${item?.lastOpened.substring(4,8)}`
+                            :[
+                                item.status === 'draft'
+                                ? `Created on ${item.lastOpened.substring(4,8)}`
+                                : `Published on ${item.lastOpened.substring(4,8)}`
+                            ] 
+                        }
                     </Typography>
                 </div>
             )
@@ -483,8 +756,8 @@ function App() {
             category: `Last opened on`,
             component: item => (
                 <div>
-                    <Typography variant='subtitle1' noWrap={true}>
-                        {item.last_opened || item.last_modified}
+                    <Typography style={{textAlign:"left",color:"#000",font: "normal normal normal 12px/17px Open Sans"}} variant='subtitle1' noWrap={true}>
+                        {item.lastOpened || item.last_modified}
                         <Typography
                             variant='subtitle1'
                             noWrap={true}
@@ -493,8 +766,7 @@ function App() {
                             color: '#606060',
                             marginLeft: '2px'
                         }}>
-                            Edited by {item.user}
-                            at {item.time}
+                            Edited by {item.user} at {item.time}
                         </Typography>
                     </Typography>
                 </div>
@@ -508,7 +780,7 @@ function App() {
                     display: 'flex',
                     flexWrap: 'wrap'
                 }}>
-                    <div style={{
+                    {/* <div style={{
                         marginRight: '8px'
                     }}>
                         {' '}
@@ -527,7 +799,7 @@ function App() {
                             height={17}
                             width={17}
                             onClick={() => console.log('1')}/>{' '}
-                    </div>
+                    </div> */}
                     <div >
                         <Dropdown
                             type='icons'
@@ -536,18 +808,23 @@ function App() {
                             {
                                 id: 1,
                                 value: 'Show Query',
-                                label: `Show Query`,
-                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/show_query.svg`
+                                label: `Edit`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_edit.svg`
                             }, {
                                 id: 2,
                                 value: 'Exports',
-                                label: `Exports`,
-                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/grey_export.svg`
+                                label: `Download`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_download.svg`
                             }, {
                                 id: 3,
                                 value: 'Trends',
-                                label: `Trends`,
-                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/trends.svg`
+                                label: `Unpin`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_unpin.svg`
+                            }, {
+                                id: 3,
+                                value: 'Trends',
+                                label: `Delete`,
+                                startIcon: `${process.env.REACT_APP_CONTEXT_PATH}/icons/pinned_delete.svg`
                             }
                         ]}/>
                     </div>
@@ -560,19 +837,19 @@ function App() {
         "data": {
             "tiles": [
                 {
-                    "title": "219",
+                    "title": "2219",
+                    "description": {
+                        "label": "Health",
+                        "value": "Good"
+                    },
+                    "healthstatus": "3"
+                }, {
+                    "title": "6",
                     "description": {
                         "label": "Health",
                         "value": "Good"
                     },
                     "healthstatus": "1"
-                }, {
-                    "title": "6",
-                    "description": {
-                        "label": "Health",
-                        "value": "Average"
-                    },
-                    "healthstatus": "2"
                 }, {
                     "title": "3",
                     "description": {
@@ -627,11 +904,11 @@ function App() {
                 "workspaces": [
                     {
                         "id": "1",
-                        "name": "iBPS Report Designer",
+                        "name": "Application Designer",
                         "views": [
                             {
                                 "id": "0",
-                                "name": "Home",
+                                "name": "home",
                                 "tabs": [
                                     {
                                         "id": "1",
@@ -674,19 +951,15 @@ function App() {
                                 ]
                             }, {
                                 "id": "1",
-                                "name": "Reports",
+                                "name": "applications",
                                 "tabs": []
                             }, {
                                 "id": "2",
-                                "name": "Scheduler",
+                                "name": "templates",
                                 "tabs": []
                             }, {
                                 "id": "3",
                                 "name": "Audit Logs",
-                                "tabs": []
-                            }, {
-                                "id": "4",
-                                "name": "IBPS Settings",
                                 "tabs": []
                             }
                         ]
@@ -733,8 +1006,8 @@ function App() {
             })
         }
         setHomeTiles(merged)
-    }
-
+    }  
+     
     useEffect(() => {
         // setIsLoading({ ...isLoading, loading: true });
         // GetWorkspaceDef(passedDefaultValues).then((res) => {
@@ -849,14 +1122,25 @@ function App() {
             // loginBam(); loginWebDesktop(); loginMDM(); } }).catch((err) => { })
         }
     }, [passedDefaultValues]);
+    
+    // console.log(newApplication); 
+    // console.log(allApplication);
+    
+    // console.log(categoryWiseApps);
+    // console.log(statusWiseApps);
 
+    // console.log(tilesDataArr);
+    // console.log(pinnedData);  
+    
+    // console.log(merged);
+       
     return (
         <div
         className="App"
         style={{
         display: "flex",
         flexDirection: "column"
-    }}>
+        }}>
         {/* <Header />
             <LeftNavbar /> */}
 
@@ -865,6 +1149,7 @@ function App() {
             <MainHeader
                 workspaceList={workspaceList}
                 active={currentWorkSpace}
+                setActive={setCurrentWorkSpace}
                 onChangeWorkSpace={workspaceChangeHandler}/>
 
         </AppBar>
@@ -872,66 +1157,132 @@ function App() {
         <div style={{display:"flex",height:"calc(100vh-55px)"}} >
 
             <DynamicSidebar
+                setActiveScreen={setActiveScreen}
                 sidebar_list={sidebarList}
-                active={defaultValues.view_id}
+                active={activeScreen}
                 onChangeTab={onChangeHandler}
                 labelKey="name"
                 valueKey="id"
                 createButton={handleClick}
                 drawer_type="tabs"
+                // makeApplication={setActiveScreen("newApplication")}
                 giveMeDrawerState={setDrawerState}
                 expand={defaultValues.default_navigation === "E"}/> {/* <Home/> */}
-            
-            <div style={{display:"flex",flexDirection:"column", padding:"15px 5px"}}>
-                <DashboardTile
-                    tileList={homeTiles}
-                    direction={`${t('bam:HTML_DIR')}`}
-                    width={'180pt'}/>
 
-                {/* <div>
+
+            {activeScreen==="home" &&
+            <div style={{display:"flex",flexDirection:"column", padding:"0 5px 15px",width:"100%",background:"#F8F8F8",height:'calc(99vh - 60px)'}}>
+                       
+                <DashboardTile
+                    tileList={tilesDataArr}
+                    direction={`${t('bam:HTML_DIR')}`}
+                    width={'180pt'}
+                    height="72px"    
+                    />
+
+                {allApplication?.length===0
+                ?
+                <div >
                     <NotFound />
                     
-                    <EmptyHome />
-                </div>     */}
+                    <EmptyHome setActiveScreen={setActiveScreen}/>
+                </div>    
+                :
+                <>
+                    <Pinned
+                        pinnedData={pinnedData}
+                        headerData={RecentHeadCells}
+                        action={Action}
+                        defaultView={'tile'}
+                        direction={`${t('bam:HTML_DIR')}`}
+                        loading={false}
+                        isSearch={true}
+                        height={'182pt'}
+                        width={'180pt'}
+                        imageInfo={{
+                        path: `${process.env.REACT_APP_CONTEXT_PATH}/icons/`,
+                        ext: '.svg'
+                        }}
+                        label={{
+                        heading: `${t('bam:Pinned')}`,
+                        viewLess: `${t('bam:View Less')}`,
+                        viewAll: `${t('bam:View All')}`,
+                        last_modified: `${t('bam:Last Modified')}`,
+                        lastOpened:`${t('bam:Last Opened')}`
+                    }}/>
 
-                <Pinned
-                    pinnedData={pinnedData}
-                    headerData={HeadCells}
-                    action={Action}
-                    defaultView={'tile'}
-                    direction={`${t('bam:HTML_DIR')}`}
-                    loading={false}
-                    height={'67pt'}
-                    width={'180pt'}
-                    imageInfo={{
-                    path: `${process.env.REACT_APP_CONTEXT_PATH}/icons/`,
-                    ext: '.svg'
-                }}
-                    label={{
-                    heading: `${t('bam:Pinned')}`,
-                    viewLess: `${t('bam:View Less')}`,
-                    viewAll: `${t('bam:View All')}`,
-                    last_modified: `${t('bam:Last Modified')}`
-                }}/>
-
-                <RecentActivity
-                    headerData={RecentHeadCells}
-                    recentList={listData}
-                    loading={false}
-                    isSearch={true}
-                    direction={`${t('bam:HTML_DIR')}`}
-                    heading={`${t('bam:Recents')}`}
-                    searchProps={{
-                    searchingKey: 'name',
-                    placeholder: `${t('bam:TITLE_SEARCH')}`,
-                    regex: null
-                }}
-                    imageInfo={{
-                    path: `${process.env.REACT_APP_CONTEXT_PATH}/icons/`,
-                    ext: '.svg'
-                }}/>
-
+                    <RecentActivity
+                        headerData={RecentHeadCells}
+                        // recentList={listData}
+                        recentList={recentData}
+                        loading={false}
+                        isSearch={true}
+                        direction={`${t('bam:HTML_DIR')}`}
+                        heading={`${t('bam:Recents')}`}
+                        searchProps={{
+                        searchingKey: 'name',
+                        placeholder: `${t('bam:TITLE_SEARCH')}`,
+                        regex: null
+                        }}
+                        imageInfo={{
+                        path: `${process.env.REACT_APP_CONTEXT_PATH}/icons/`,
+                        ext: '.svg'
+                        }}/>
+                </>
+                }               
             </div>
+            }
+            
+            {activeScreen==="newApplication" &&
+            <NewApplication setCreateNew_PopUp={setCreateNew_PopUp}/>
+            }
+
+            {activeScreen==="applications" &&
+            <Applications 
+                headerData={RecentHeadCells} 
+                setActiveScreen={setActiveScreen} 
+                setNewCategory={setNewCategory} 
+                setCreateNew_PopUp={setCreateNew_PopUp} 
+                setCreateCategory_PopUp={setCreateCategory_PopUp} 
+                addCategory={addCategory} 
+                HeadCells={RecentHeadCells} 
+                isSearch={true}
+                Action={Action} 
+                allCategories={allCategories} 
+                categoryWiseApps={categoryWiseApps} 
+                statusWiseApps={statusWiseApps}
+                direction={`${t('bam:HTML_DIR')}`}
+                searchProps={{
+                        searchingKey: 'name',
+                        placeholder: `${t('bam:TITLE_SEARCH')}`,
+                        regex: null
+                }}
+                
+                />
+            }
+            
+            {createNew_PopUp==="open" && 
+            <CreateNewPopup allCategories={allCategories} setActiveScreen={setActiveScreen} setCreateNew_PopUp={setCreateNew_PopUp} setNewApplication={setNewApplication} newApplication={newApplication} addApplication={addApplication} />
+             }
+
+             {createCategory_PopUp==="open" && 
+            <CreateNewCategory setNewCategory={setNewCategory} setCreateCategory_PopUp={setCreateCategory_PopUp} newCategory={newCategory} addCategory={addCategory} />
+             }
+            
+            {activeScreen==="home" &&
+            <div style={{width:'calc(33.3vw - 30px)',background:"#FCFCFC", color:"#000",padding:"10px 10px",textAlign: "left",font: "normal normal 600 14px/19px Open Sans"}}>
+                Activities
+                <SearchBox
+                  height="14px"
+                  width="200px"
+                  direction={direction}
+                //   onSearchSubmit={onSearchSubmit}
+                //   clearSearchResult={clearSearchResult}
+                //   placeholder={searchProps.placeholder}
+                //   regex={searchProps.regex}
+                />
+            </div>
+             }
 
         </div>
 
